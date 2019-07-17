@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="viewModel" type="com.project.eunmin.todoapp.ui.add.AddViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.add.AddActivity">
+
+        <TextView
+                android:text="추가하기"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView4"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/addtaskview_title"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:textColor="#000000"
+                android:textSize="20sp"/>
+        <ImageView
+                android:layout_width="30dp"
+                android:layout_height="0dp" app:srcCompat="@drawable/ic_round_clear_24px"
+                android:id="@+id/imageView" app:layout_constraintBottom_toTopOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
+                android:onClick="@{() -> viewModel.onCancelBtnClicked()}"/>
+        <androidx.constraintlayout.widget.Guideline
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:layout_constraintGuide_begin="56dp"
+                android:id="@+id/guideline"/>
+        <EditText
+                android:id="@+id/addtaskview_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:ems="10"
+                android:hint="Title"
+                android:text="@={viewModel.title}"
+                android:inputType="textPersonName"
+                android:afterTextChanged="@{() -> viewModel.onTitleTextChanged()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="@+id/guideline"/>
+
+        <EditText
+                android:id="@+id/addtaskview_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:ems="10"
+                android:gravity="top|left"
+                android:hint="content"
+                android:text="@={viewModel.content}"
+                android:afterTextChanged="@{() -> viewModel.onContentTextChanged()}"
+                android:inputType="textMultiLine|textPersonName"
+                app:layout_constraintBottom_toTopOf="@+id/button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/addtaskview_title"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="확인"
+                android:enabled="@{viewModel.addBtnEnabled}"
+                android:onClick="@{() -> viewModel.onAddBtnClicked()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
